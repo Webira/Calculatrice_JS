@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <title>Javascript</title>
+		<style>
+		*{
+		   box-sizing: border-box; 
+		}
+		body{
+			background-color:  rgb(240,240,240);
+			color: #fff;
+			text-transform: uppercase;
+			text-align: center;
+		}
+		/* ****** TYPOGRAPHIE ****** */
+		h1{}
+		h2{}
+		h3{}
+		h4{}
+		h5{}
+		h6{}
+
+		a{}
+
+		/* ******** STRUCTURE ********* */
+
+		#conteneur{
+			margin: 47px auto 98px;
+			width: 960px;
+			background-color:  rgb(255,255,255);
+			border: 2px solid rgb(150,150,150);
+		}
+		.conteneur-flex{
+			display: flex;
+		}
+		ul.conteneur-flex li{
+			flex:1;
+			background-color: #87CEFA;
+		}
+
+
+		/* MENU */
+		ul.conteneur-flex{
+			list-style: none;
+			margin: 0;
+			padding:0;
+		}
+		/* ****** HEADER ****** */
+		#logo{
+			width: 300px;
+			height: 120px;
+			background-color:  #6495ED;
+			position: relative;
+		}
+		#logo div{
+			position: absolute;
+			width: 100px;
+			height: 50px;
+			left: calc(50% - 50px);
+			top: calc(50% - 10px);
+		}
+		.banniere{
+			width: 660px;
+			height: 120px;
+			line-height: 120px;
+			background-color:  #4169e2;
+		}
+		#header ul.conteneur-flex li{
+			height: 50px;
+			line-height: 50px;
+		}
+		/* ****** MAIN ****** */
+		.colonne{
+			width: 300px;
+			background-color: rgb(240,240,240);
+			color: rgb(150,150,150);
+		}
+		.colonne div{
+			background-color: rgb(255,255,255);
+			width: 260px;
+			height: 100px;
+			margin:20px;
+			padding: 10px;
+			border: 1px solid;
+			line-height: 80px;
+		}
+		.article-video{
+			width: 660px;
+			background-color:rgb(240,240,240);
+			margin: 20px;
+			border: 1px solid rgb(150,150,150);
+			color: rgb(150,150,150);
+		}
+		.article-video p{
+			margin: 45px 0;
+		}
+		/* ****** FOOTER ****** */
+
+		#footer ul.conteneur-flex li{
+			height: 80px;
+			line-height: 80px;
+		}
+		#footer ul{
+			padding: 0;
+			margin: 0;
+			list-style: none;
+		}
+		#footer ul li{
+			background-color: #87CEFA;
+			width: 25%;
+			height: 80px;
+			float: left;
+		}
+		.clear{ clear: both;}
+		strong{
+			font-weight: normal;
+		}
+		</style>
+    </head>
+    <body>
+        <div id="conteneur">
+            <header id="header">
+                <div class="conteneur-flex">
+                    <div id="logo"><div>logo</div></div>
+                    <div class="banniere"></div>
+                </div>
+                <nav>
+                    <ul class="conteneur-flex">
+                        <li>Menu 1</li>
+                        <li>Menu 2</li>
+                        <li>Menu 3</li>
+                        <li>Menu 4</li>
+                        <li>Menu 5</li>
+                        <li>Menu 6</li>
+                    </ul>
+                </nav>
+            </header>
+            <main>
+                <div class="conteneur-flex">
+                    <aside class="colonne">
+                        <div>
+                            colonne A
+                        </div>
+                        <div>
+                            colonne B
+                        </div>
+                        <div>
+                            colonne C
+                        </div>
+                        <div>
+                            colonne D
+                        </div>
+                    </aside>
+                    <article class="article-video">
+						
+                        <p>Cacher contenu</p>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/LNqBKTeeiWo" allowfullscreen></iframe>
+						Repere
+                    </article>
+                </div>
+            </main>
+            <footer id="footer">
+                <nav>
+                    <ul class="conteneur-flex">
+                        <li>Footer 1</li>
+                        <li>Footer 2</li>
+                        <li>Footer 3</li>
+                        <li>Footer 4</li>
+                    </ul>
+                </nav>
+            </footer>
+        </div>
+		
+		<script>
+		
+			/* 	Réalisez les trois demandes suivantes:
+			Nous pouvons pour cet exercice modifier notre element script pour y appliquer du JS mais en aucun cas modifier ni le html, ni le css. */
+			
+			/* 1 --
+			Un double clic sur la div #logo doit faire apparaitre dans la div .banniere un span contenant le texte 'Logo double cliqué !', ce texte devra apparaitre en gras */
+			
+			// selection du logo selection naturelle
+			var monLogo = logo;		
+			console.log(monLogo);
+			// appliquer l'evenemtn double click dessus
+			monLogo.ondblclick = function(){
+				console.log('dblclic fonctionne');
+				// selectionne la banniere
+				var bann = document.querySelector('#header .banniere');
+				console.log(bann);
+				// Application du contenu html dans banniere
+				bann.innerHTML = '<span><strong">Logo double cliqué !<strong></span>';
+				bann.children[0].children[0].style.fontWeight = 'bold';
+			};	
+
+			
+			/* 2--
+			Un clic sur le paragraphe 'cacher contenu' doit faire disparaitre l'iframe juste dessous */
+			
+			// je vise le P
+			document.querySelector('.article-video p').addEventListener('click', function(){
+				// je vise la video pour la faire disparaitre
+				document.querySelector('.article-video iframe').style.display = 'none';
+			});
+
+
+			
+			/* 3--
+			Le survol de la souris sur chaque li de la nav et du footer doit faire passer son background à la valeur #00BFFF. Lorsque la souris cesse son survol, le li doit revenir à sa couleur d'origine. */
+			
+			// je selectionne tous les li dans une nav
+			var mesLi = document.querySelectorAll('#header nav li, #footer nav li');
+			console.log(mesLi);
+
+			// je boucle sur la liste recoltée
+			for(var i = 0; i < mesLi.length; i++){
+				// j'applique l'effet de survol
+				mesLi[i].addEventListener('mouseover', function(){
+					this.style.background = "#00BFFF";
+				});
+				// j'applique l'annulation de l'effet en fin de survol
+				mesLi[i].addEventListener('mouseout', function(){
+					this.style.background = "";
+				});
+			}
+		
+		</script>
+    </body>
+</html>

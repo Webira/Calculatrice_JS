@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    
+    <title>TP Calculatrice</title>
+    <style>
+        body{
+            text-align: center;
+        }
+        #container{
+            width: 80%;
+            margin: 0 auto;
+            background-color: dodgerblue;
+            color: white;
+            padding: 50px;
+            margin-top: 20px;
+        }
+        .cacher{
+            display: none;
+        }
+        .montrer{
+            display: block;
+        }
+        #info{
+            background: gold;
+            color: dodgerblue;
+        }
+    </style>
+</head>
+<body>
+    <a href="#" id="montre">Faire apparaitre</a>
+    /
+    <a href="#" id="cache">Faire disparaitre</a>
+    <br>
+    <a href="#" id="toggle">Toggle</a>
+    <br>
+    <a href="#" id="toggleClass">Toggle par classe</a>
+    <div id="container">
+        <form name="formulaire" id="formulaire">
+            <label for="saisie1">Saisie 1</label>
+            <input type="text" name="saisie1" id="saisie1" onmouseover="msgSaisieOn();" onmouseout="msgSaisieOff();">
+            <select name="operateur" onmouseout="msgSaisieOff();">
+                <option value="+">+</option>
+                <option value="-">-</option>
+                <option value="*">*</option>
+                <option value="/">/</option>
+            </select>
+            <label for="saisie2">Saisie 2</label>
+            <input type="text" name="saisie2" id="saisie2" onmouseover="msgSaisieOn();" onmouseout="msgSaisieOff();">
+            <input type="submit" name="bouton" value="OK">
+        </form>
+        <p id="info"></p>
+    </div>
+    <script>
+
+        // je créé la fonction dédiée au calcul
+        function calcul(nbr1, ope, nbr2){
+            var resultat;
+            switch (ope){
+                case '+' :
+                    resultat = nbr1 + nbr2;
+                break;
+                case '-' :
+                    resultat = nbr1 - nbr2;
+                break;
+                case '*' :
+                    resultat = nbr1 * nbr2;
+                break;
+                case '/' :
+                    if(nbr2 != 0){
+                        resultat = nbr1 / nbr2;
+                    }
+                    else{
+                        resultat = 'Opération impossible';
+                    }
+                break;
+            }
+            // le resultat est retourné pour ensuite pouvoir le manipuler
+            console.log(resultat);
+            return resultat;
+
+        }
+
+
+        // je selectionne le formulaire
+        var form = formulaire;
+
+        // je place une ecoute de validation sur le formulaire
+        form.addEventListener('submit', function(event){
+
+            // je stoppe le rechargement de la page du a la validation
+            event.preventDefault();
+
+            // je selectionne la value du second enfant du formulaire et je le transfgorme en number
+            var saisie1 = parseFloat(form.children[1].value);
+            console.log(saisie1);            
+            // je selectionne la value du cinquieme enfant du formulaire et je le transfgorme en number
+            var saisie2 = parseFloat(form.children[4].value);
+            console.log(saisie2);
+            // je selectionne la value du troisieme enfant du formulaire
+            var operateur = form.children[2].value;
+            console.log(operateur);
+
+            
+            // si saisie1 ou saisie2 ne sont pas des nombres : message d'erreur
+            if(isNaN(saisie1) || isNaN(saisie2)){
+                alert('valeurs incorrectes');
+            }
+            else{
+                var result = calcul(saisie1, operateur, saisie2);
+                alert(saisie1 + operateur + saisie2 + ' = ' + result);
+            }
+        });
+
+        // fonctions de survol qui sont appelées par les attributs d'evenement directement dans les balises html
+
+        // je créé la variable qui contient le paragraphe #info
+        var para = info;
+
+        // fonction lorsque je survole un input
+        function msgSaisieOn(){
+            // Entrer du texte dans le paragraphe info
+            para.innerText = 'Veuillez entrer une valeur';
+        }
+        // fonction lorsque je survole le select
+        function msgOperateurOn(){
+            // Entrer du texte dans le paragraphe info
+            para.innerText = 'Veuillez choisir un opérateur';
+        }
+        // fonction lorsque je cesse de survoler input comme select
+        function msgSaisieOff(){
+            // efface le texte dans le paragraphe info
+            para.innerText = '';
+        }
+
+        document.querySelector('select').onmouseover = msgOperateurOn;
+
+
+
+    // apparaitre / disparaitre
+
+    // quand je selection l'id cache, j'applique un display none;
+    var contenu = container;
+    var hide = cache;
+    hide.addEventListener('click', function(event){
+        event.preventDefault();
+        contenu.style.display = 'none';
+    });
+
+    var show = montre;
+    show.addEventListener('click', function(event){
+        event.preventDefault();
+        contenu.style.display = '';
+    });
+
+    var toggle = toggleClass;
+    toggle.addEventListener('click', function(event){
+        event.preventDefault();
+        // si la liste de classe de contenu contient la classe cacher
+        if(contenu.classList.contains('cacher')){
+            // alors je retire la classe cacher
+            contenu.classList.remove('cacher');
+        }
+        // sinon
+        else{
+            // j'ajoute la classe cacher à contenu
+            contenu.classList.add('cacher');
+        }
+        // ici exemple plus simple via toggle() qui fait l'equivalent
+        // contenu.classList.toggle('cacher');
+    });
+
+
+    </script>
+</body>
+</html>

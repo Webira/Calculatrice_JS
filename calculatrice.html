@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    
+    <title>TP Calculatrice</title>
+    <style>
+        body{
+            text-align: center;
+        }
+        #container{
+            width: 80%;
+            margin: 0 auto;
+            background-color: dodgerblue;
+            color: white;
+            padding: 50px;
+            margin-top: 20px;
+        }
+        .cacher{
+            display: none;
+        }
+        .montrer{
+            display: block;
+        }
+        #info{
+            background: gold;
+            color: dodgerblue;
+        }
+    </style>
+</head>
+<body>
+    <a href="#" id="montre">Faire apparaitre</a>
+    /
+    <a href="#" id="cache">Faire disparaitre</a>
+    <br>
+    <a href="#" id="toggle">Toggle</a>
+    <br>
+    <a href="#" id="toggleClass">Toggle par classe</a>
+    <div id="container">
+        <form name="formulaire" id="formulaire">
+            <label for="saisie1">Saisie 1</label>
+            <input type="text" name="saisie1" id="saisie1" onmouseover="msgSaisieOn();" onmouseout="msgSaisieOff();">
+            <select name="operateur" onmouseover="msgOperateurOn();" onmouseout="msgSaisieOff();">
+                <option value="+">+</option>
+                <option value="-">-</option>
+                <option value="*">*</option>
+                <option value="/">/</option>
+            </select>
+            <label for="saisie2">Saisie 2</label>
+            <input type="text" name="saisie2" id="saisie2" onmouseover="msgSaisieOn();" onmouseout="msgSaisieOff();">
+            <input type="submit" name="bouton" value="OK">
+        </form>
+        <p id="info"></p>
+    </div>
+    <script>
+	
+	
+    </script>
+</body>
+</html>
